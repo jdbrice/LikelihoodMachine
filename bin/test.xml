@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
 
+	<Logger globalLogLevel="info" />
 
 	<LikelihoodMachine name="dyMtd" >
-		<GenericPDF name="signal" formula="{yield} / sqrt( 2 * pow({sig},2) * TMath::Pi() ) * TMath::Exp( -pow( x - {mu} / {sig}, 2 ) / 2.0 )" yield="1.0" sig="5.0" mu="1.6" />
-		<GenericPDF name="background" formula="{yield} / sqrt( 2 * pow({sig},2) * TMath::Pi() ) * TMath::Exp( -pow( x - {mu} / {sig}, 2 ) / 2.0 )" yield="2.0" sig="5.0" mu="1.6" />
+		<GenericPDF name="signal" formula="{yield} / sqrt( 2 * pow({sig},2) * TMath::Pi() ) * TMath::Exp( -pow( x - {mu} / {sig}, 2 ) / 2.0 )" yield="1.0" sig="5.0" mu="1.6" min="-100" max="100" />
+		<GenericPDF name="background" formula="{yield} / sqrt( 2 * pow({sig},2) * TMath::Pi() ) * TMath::Exp( -pow( x - {mu} / {sig}, 2 ) / 2.0 )" yield="2.0" sig="5.0" mu="1.6" min="-100" max="100" />
 	</LikelihoodMachine>
 
 
 	<LikelihoodMachine name="mtdCell" >
-		<GenericPDF name="signal" formula="1" />
-		<GenericPDF name="background" formula="{yield} / sqrt( 2 * pow({sig},2) * TMath::Pi() ) * TMath::Exp( -pow( x - {mu} / {sig}, 2 ) / 2.0 )" yield="2.0" sig="5.0" mu="1.6" />
+		<GenericPDF name="signal" formula="1" min="0" max="12"/>
+		<GenericPDF name="background" formula="{yield} / sqrt( 2 * pow({sig},2) * TMath::Pi() ) * TMath::Exp( -pow( x - {mu} / {sig}, 2 ) / 2.0 )" yield="2.0" sig="5.0" mu="1.6" min="0" max="12" />
 	</LikelihoodMachine>
 
 

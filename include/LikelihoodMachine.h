@@ -43,11 +43,18 @@ public:
 
 		// now get norm factor
 		double total = 0.0;
+		int N = 0;
 		for ( shared_ptr<GenericPDF> pdf : pdfs ){
 			total += pdf->eval( _x );
+			N++;
 		}
 
-		return _p / total * weight;
+		if ( N > 1 ){
+			return _p / total * weight;
+		} else {
+			return 0;
+		}
+		
 	}
 
 	string toString() {

@@ -30,3 +30,6 @@
 
 # build
 *.sconsign.dblite
+
+# data files
+*.root

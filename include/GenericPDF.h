@@ -38,6 +38,10 @@ public:
 			this->type = PdfType::Histogram;
 			// TODO: add histo support
 		}
+
+		funcNormalization = integral();
+		INFO( classname(), "[" << name << "]Function normalization : " << funcNormalization );
+
 	}
 	
 	string getName(){
@@ -46,9 +50,18 @@ public:
 
 	double eval( double _x ){
 		if ( this->type == PdfType::Function ){
-			return xfunc.eval(_x);
+			return xfunc.eval(_x) / funcNormalization;
 		}
 		return std::numeric_limits<double>::quiet_NaN();
+	}
+
+	double integral(double _min = 0, double _max = -10000 ) {
+		if ( _max < _min ){
+			_min = xfunc.getTF1()->GetXmin();
+			_max = xfunc.getTF1()->GetXmax();
+		}
+
+		return xfunc.getTF1()->Integral( _min, _max );
 	}
 
 	string toString(){
@@ -65,6 +78,7 @@ protected:
 	// backers
 	// shared_ptr<TH1> h = nullptr;
 	XmlFunction xfunc;
+	double funcNormalization;
 	enum class PdfType { Histogram, Function };
 	PdfType type;
 	
