@@ -21,14 +21,30 @@ int main( int argc, char* argv[] ) {
 
 
 	XmlConfig xfg( "test.xml" );
-	LikelihoodMachine lm;
-	lm.load( xfg, "LikelihoodMachine" );
+	
 
-	INFO( "Engine", lm.toString() );
-
-	INFO( "Engine", "p(Signal) = " << lm.eval( "signal", 0.0 ) );
-
-	INFO( "Engine", "p(Background) = " << lm.eval( "background", 0.0 ) );
+	{
+		INFO( "Engine", "Testing FormulaPDFs" );
+		LikelihoodMachine lm;
+		lm.load( xfg, "LikelihoodMachine" );
+	
+		INFO( "Engine", lm.toString() );
+	
+		INFO( "Engine", "p(Signal) = " << lm.eval( "signal", 9.0 ) );
+	
+		INFO( "Engine", "p(Background) = " << lm.eval( "background", 9.0 ) );
+	}
+	{
+		INFO( "Engine", "Testing HistogramPDFs" ); 
+		LikelihoodMachine lm;
+		lm.load( xfg, "LikelihoodMachine[1]" );
+	
+		INFO( "Engine", lm.toString() );
+	
+		INFO( "Engine", "p(Signal) = " << lm.eval( "signal", 1.0 ) );
+	
+		INFO( "Engine", "p(Background) = " << lm.eval( "background", 1.0 ) );
+	}
 
 
 
